@@ -4,7 +4,7 @@ MAINTAINER docker_user  "docker@aa.ml"
 
 COPY run.sh ./run.sh
 ## update and install the image
-RUN mkdir -p /etc/v2ray && apt-get update && apt-get install -y curl wget zip openssh-server && sh ./run.sh
+RUN mkdir -p /etc/v2ray && apt-get update && apt-get install -y curl wget zip screen nano nginx openssh-server && sh ./run.sh
 
 COPY config.json /etc/v2ray/config.json
 
