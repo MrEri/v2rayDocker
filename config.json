@@ -1,29 +1,50 @@
 {
-  "inbounds": [
-    {
-      "port": 8443,
-      "listen":"0.0.0.0",//只监听 127.0.0.1，避免除本机外的机器探测到开放了 10000 端口
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "b831381d-6324-4d53-ad4f-8cda48b30811",
-            "alterId": 0
-          }
-        ]
-      },
-      "streamSettings": {
+  "log": {
+    "loglevel": "warning",
+    "access": "/dev/null",
+    "error": "/dev/null"
+  },
+  "inbounds": [{
+    "listen":"127.0.0.1",
+    "port": 10000,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "de20d937-ca8f-af14-ea07-20b45447d371",
+          "level": 1,
+          "alterId": 0
+        }
+      ]
+    },
+	"streamSettings": {
         "network": "ws",
         "wsSettings": {
-        "path": "/v2ray"
+        "path": "/bannedbook"
         }
-      }
     }
-  ],
+  }],
   "outbounds": [
     {
       "protocol": "freedom",
-      "settings": {}
+      "settings": {},
+      "tag": "allowed"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
     }
-  ]
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
 }
