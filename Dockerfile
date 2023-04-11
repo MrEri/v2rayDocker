@@ -2,7 +2,7 @@ FROM ubuntu
 
 MAINTAINER docker_user  "docker@aa.ml"
 
-COPY ["run.sh" "./run.sh"]
+COPY run.sh ./run.sh
 ## update and install the image
 RUN mkdir -p /etc/v2ray && apt-get update && apt-get install -y curl wget openssh-server && sh ./run.sh
 
